@@ -83,6 +83,9 @@ There are two things you can do about this warning:
 (setq recentf-max-saved-items 20)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
+;;dired
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;;set up dashboard
 ;;(dashboard-setup-startup-hook)
 ;;(setq dashboard-startup-banner 'logo)
