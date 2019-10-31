@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#link emacs config
+ln -s ~/dotfiles/.emacs ~/.emacs
+
+
