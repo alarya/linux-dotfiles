@@ -3,4 +3,5 @@
 #link emacs config
 ln -s ~/dotfiles/.emacs ~/.emacs
 
-
+#link notmuch config
+ln -s ~/dotfiles/.notmuch-config ~/.notmuch-config
