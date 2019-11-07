@@ -53,7 +53,8 @@ There are two things you can do about this warning:
 				  ivy-clojuredocs
 				  pdf-tools
 				  org-pdfview
-				  bibliothek))
+				  bibliothek
+				  omnisharp))
 
 ;;Emacs settings
 ;;==============
@@ -65,13 +66,12 @@ There are two things you can do about this warning:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
-(setq column-number-mode t)
+(setq column-number-mode	t)
+(setq inhibit-startup-message	t)
 (menu-bar-mode -1)
-(tool-bar-mode -1)
+(tool-bar-mode	-1)
 (toggle-scroll-bar -1)
-(load-theme 'afternoon t)
-(setq inhibit-startup-message t)
-;;spell check
+(load-theme	'afternoon t)
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -95,8 +95,8 @@ There are two things you can do about this warning:
  
 ;;Recent files setting
 (recentf-mode 1)
-(setq recentf-max-menu-items 20)
-(setq recentf-max-saved-items 20)
+(setq recentf-max-menu-items	20)
+(setq recentf-max-saved-items	20)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 ;;dired
@@ -121,12 +121,12 @@ There are two things you can do about this warning:
 
 (setq org-link-frame-setup
       (quote
-       ((vm . vm-visit-folder-other-frame)
-	(vm-imap . vm-visit-imap-folder-other-frame)
-	(gnus . org-gnus-no-new-news)
-	(file . find-file-other-frame)
-	(wl . wl-other-frame)
-	(pdfview . find-file-other-window))))
+       ((vm		.	vm-visit-folder-other-frame)
+	(vm-imap	.	vm-visit-imap-folder-other-frame)
+	(gnus		.	org-gnus-no-new-news)
+	(file		.	find-file-other-window)
+	(wl		.	wl-other-frame)
+	(pdfview	.	find-file-other-window))))
 
 ;;Org agenda files
 (setq org-agenda-files
@@ -188,28 +188,28 @@ There are two things you can do about this warning:
 
 (require 'smtpmail)
 
-(setq send-mail-function 'smtpmail-send-it)
-(setq message-sendmail-f-is-evil 't)
-(setq message-sendmail-extra-arguments '("--read-envelope-from"))
+(setq send-mail-function		'smtpmail-send-it)
+(setq message-sendmail-f-is-evil	't)
+(setq message-sendmail-extra-arguments	'("--read-envelope-from"))
 
-(setq message-send-mail-function 'message-send-mail-with-sendmail)
-(setq sendmail-program "/usr/bin/msmtp")
-(setq message-sendmail-extra-arguments '("-a" "gmail"))
-(setq user-full-name "Alok Arya")
-(setq smtpmail-local-domain "gmail.com")
-(setq user-mail-address "buntyalok06@gmail.com")
-(setq smtpmail-smtp-user "buntyalok06@gmail.com")
+(setq message-send-mail-function	'message-send-mail-with-sendmail)
+(setq sendmail-program			"/usr/bin/msmtp")
+(setq message-sendmail-extra-arguments	'("-a" "gmail"))
+(setq user-full-name			"Alok Arya")
+(setq smtpmail-local-domain		"gmail.com")
+(setq user-mail-address			"buntyalok06@gmail.com")
+(setq smtpmail-smtp-user		"buntyalok06@gmail	.	com")
 
-(setq smtpmail-smtp-server "smtp.gmail.com")
-(setq smtpmail-stream-type 'ssl)
-(setq smtpmail-smtp-service 465)
-(setq smtpmail-debug-info t)
-(setq smtpmail-debug-verb t)
+(setq smtpmail-smtp-server	"smtp.gmail.com")
+(setq smtpmail-stream-type	'ssl)
+(setq smtpmail-smtp-service	465)
+(setq smtpmail-debug-info	t)
+(setq smtpmail-debug-verb	t)
 
-(setq notmuch-search-oldest-first nil)
-(setq message-kill-buffer-on-exit t)
-(setq message-default-mail-headers "Cc: \nBcc: \n")
-(setq message-auto-save-directory "~/mail/drafts")
+(setq notmuch-search-oldest-first	nil)
+(setq message-kill-buffer-on-exit	t)
+(setq message-default-mail-headers	"Cc: \nBcc: \n")
+(setq message-auto-save-directory	"~/mail/drafts")
 
 ;;html support for mails
 (require 'org-mime)
@@ -234,6 +234,7 @@ There are two things you can do about this warning:
 ;;Projectile settings
 ;;===================
 (projectile-global-mode)
+(setq projectile-completion-system 'ivy)
 
 ;;XML mode settings
 ;;=================
@@ -316,27 +317,27 @@ There are two things you can do about this warning:
 
 (eval-after-load 'cider
   '(progn
-     (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
-     (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
-     (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
-     (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)))
+     (define-key clojure-mode-map	(kbd "C-c C-v") 'cider-start-http-server)
+     (define-key clojure-mode-map	(kbd "C-M-r") 'cider-refresh)
+     (define-key clojure-mode-map	(kbd "C-c u") 'cider-user-ns)
+     (define-key cider-mode-map		(kbd "C-c u") 'cider-user-ns)))
 
 
 ;;Elisp settings
 ;;==============
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-
+(add-hook 'emacs-lisp-mode-hook				#'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook	#'enable-paredit-mode)
+(add-hook 'ielm-mode-hook				#'enable-paredit-mode)
+(add-hook 'lisp-mode-hook				#'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook			#'enable-paredit-mode)
+(add-hook 'scheme-mode-hook				#'enable-paredit-mode)     
+     
 ;; eldoc-mode shows documentation in the minibuffer when writing code
 ;; http://www.emacswiki.org/emacs/ElDoc
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook		'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook	'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook		'turn-on-eldoc-mode)
 
 ;;load pdf-tools
 (pdf-loader-install)
@@ -347,3 +348,8 @@ There are two things you can do about this warning:
 ;;set up org links to pdf
 (eval-after-load 'org '(require 'org-pdfview)) 
 (add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (file link) (org-pdfview-open link))))
+
+;;C Sharp settings
+;;================
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(add-hook 'csharp-mode-hook #'flycheck-mode)
