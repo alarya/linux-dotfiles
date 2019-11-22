@@ -170,7 +170,7 @@ There are two things you can do about this warning:
 
 ;;Log closed time for a todo
 (setq org-log-done 'time)
-;;(setq org-log-into-drawer nil)
+(setq org-log-into-drawer t)
 
 (setq org-agenda-skip-scheduled-if-done t)
 
