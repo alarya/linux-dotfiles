@@ -54,7 +54,8 @@ There are two things you can do about this warning:
 				  pdf-tools
 				  org-pdfview
 				  bibliothek
-				  omnisharp))
+				  omnisharp
+				  org-ref))
 
 ;;Emacs settings
 ;;==============
@@ -117,6 +118,9 @@ There are two things you can do about this warning:
 
 ;;Org mode settings
 ;;=================
+(require 'org-id)
+(require 'org-ref)
+
 (setq org-return-follows-link t)
 
 (setq org-link-frame-setup
@@ -157,6 +161,18 @@ There are two things you can do about this warning:
 
 ;;enable auto-fill by default for org mode
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+;;catch invisible edits
+(setq org-catch-invisible-edits 'smart)
+
+;;block parent todo from completion if all children are not
+(setq org-enforce-todo-dependencies 1)
+
+;;Log closed time for a todo
+(setq org-log-done 'time)
+;;(setq org-log-into-drawer nil)
+
+(setq org-agenda-skip-scheduled-if-done t)
 
 ;;custom agenda views
 (setq org-agenda-custom-commands
