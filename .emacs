@@ -36,6 +36,7 @@ There are two things you can do about this warning:
 				  magit-p4
 				  magit
 				  afternoon-theme
+				  material-theme
 				  sx
 				  powerline
 				  org-bullets
@@ -61,18 +62,19 @@ There are two things you can do about this warning:
 ;;==============
 (setq-default fill-column 76)
 (setq-default frame-title-format "%b (%f)")
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
+(set-face-attribute 'default nil
+		    :family "Consolas"
+		    :foundry "outline"
+		    :slant 'normal
+		    :weight 'normal
+		    :height 120
+		    :width 'normal)
 (setq column-number-mode	t)
 (setq inhibit-startup-message	t)
 (menu-bar-mode -1)
 (tool-bar-mode	-1)
 (toggle-scroll-bar -1)
-(load-theme	'afternoon t)
+(load-theme	'material t)
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
