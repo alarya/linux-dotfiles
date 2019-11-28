@@ -178,6 +178,10 @@ There are two things you can do about this warning:
 
 (setq org-agenda-skip-scheduled-if-done t)
 
+;;archive subtree settings
+(setq org-cycle-open-archived-trees t)
+(setq org-export-with-archived-trees t)
+
 ;;custom agenda views
 (setq org-agenda-custom-commands
       '(("b" "My org view"
