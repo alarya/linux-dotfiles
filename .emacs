@@ -56,7 +56,9 @@ There are two things you can do about this warning:
 				  org-pdfview
 				  bibliothek
 				  omnisharp
-				  org-ref))
+				  org-ref
+				  elpy
+				  flycheck))
 
 ;;Emacs settings
 ;;==============
