@@ -369,3 +369,14 @@ There are two things you can do about this warning:
 ;;================
 (add-hook 'csharp-mode-hook 'omnisharp-mode)
 (add-hook 'csharp-mode-hook #'flycheck-mode)
+
+
+;;Python settings
+;;===============
+(elpy-enable)
+(add-hook 'python-mode-hook 'linum-mode)
+(setq elpy-rpc-python-command "python3")
+
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
