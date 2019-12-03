@@ -140,7 +140,7 @@ There are two things you can do about this warning:
 (setq org-agenda-files
       '("~/one-drive/Notes-AALOK/Qualcomm.org"
 	"~/one-drive/Notes-AALOK/QPCT.org"
-	"~/one-drive/Notes-AALOK/Personal.org"))
+	"~/github/Life/Personal.org"))
 
 ;;Org capture templates
 (setq org-capture-templates
