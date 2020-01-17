@@ -148,13 +148,13 @@ There are two things you can do about this warning:
 	 "work to do capture"
 	 entry
 	 (file+headline "~/one-drive/Notes-AALOK/Qualcomm.org" "Capture")
-	 "* TODO %^{Title}\nRecorded:%U\n%^{Description}%?"
+	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)
 	("p"
 	 "personal to do capture"
 	 entry
 	 (file+headline "~/one-drive/Notes-AALOK/Personal.org" "Capture")
-	 "* TODO %^{Title}\nRecorded:%U\n%^{Description}%?"
+	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)))
 
 ;;Shortcut for org capture
