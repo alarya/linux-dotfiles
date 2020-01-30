@@ -58,7 +58,8 @@ There are two things you can do about this warning:
 				  omnisharp
 				  org-ref
 				  elpy
-				  flycheck))
+				  flycheck
+				  ox-gfm))
 
 ;;Emacs settings
 ;;==============
@@ -139,7 +140,7 @@ There are two things you can do about this warning:
 ;;Org agenda files
 (setq org-agenda-files
       '("~/one-drive/Notes-AALOK/Qualcomm.org"
-	"~/one-drive/Notes-AALOK/QPCT.org"
+	"~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org"
 	"~/github/Life/Personal.org"))
 
 ;;Org capture templates
@@ -199,6 +200,10 @@ There are two things you can do about this warning:
 ;;load python
 (org-babel-do-load-languages 'org-babel-load-languages
 			     '((python . t)))
+
+;;enable export to markdown
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
 
 ;;Ivy settings
 ;;============
