@@ -154,7 +154,7 @@ There are two things you can do about this warning:
 	("p"
 	 "personal to do capture"
 	 entry
-	 (file+headline "~/one-drive/Notes-AALOK/Personal.org" "Capture")
+	 (file+headline "~/github/Life/Personal.org" "Capture")
 	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)))
 
