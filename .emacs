@@ -1,4 +1,5 @@
 
+
 ;;Package settings
 ;;================
 (require 'package)
@@ -210,12 +211,14 @@ There are two things you can do about this warning:
   (eval-after-load "org"
     '(require 'ox-gfm nil t)))
 
-;; (use-package org-ref
-;;   :ensure t
-;;   :after org)
-
 (use-package org-id
   :after org)
+
+;;auto complete for org-mode
+(use-package org-ac
+  :ensure t
+  :init
+  (org-ac/config-default))
 
 ;;Completion frameworks
 ;;=====================
@@ -371,9 +374,9 @@ There are two things you can do about this warning:
 ;;==================
 (use-package rainbow-delimiters
   :ensure t
-  :defer t
   :init
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode))
 
 ;;Electric pair mode
 ;;==================
@@ -383,11 +386,32 @@ There are two things you can do about this warning:
   (add-hook 'csharp-mode-hook #'electric-pair-mode))
 
 ;;Auto complete
+;;=============
 (use-package auto-complete
   :ensure t
   :init
+  ;;only enable for these modes
+  (setq ac-modes '(emacs-lisp-mode
+		   lisp-mode
+		   lisp-interaction-mode
+		   csharp-mode
+		   org-mode))
   (ac-config-default)
-  (add-hook 'prog-mode-hook #'auto-complete-mode))
+  (global-auto-complete-mode t))
+
+;;line numbers
+;;============
+(use-package linum
+  :init
+  (add-hook 'prog-mode-hook #'linum-mode))
+
+;;Company mode settings
+;;=====================
+(use-package company
+  :ensure t
+  :init
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (add-hook 'cider-mode-hook #'company-mode))
 
 ;;magit settings
 ;;==============
@@ -469,11 +493,10 @@ There are two things you can do about this warning:
 ;;ElDoc
 ;;=====
 ;; eldoc-mode shows documentation in the minibuffer when writing code
-;; http://www.emacswiki.org/emacs/ElDoc
-(add-hook 'emacs-lisp-mode-hook		'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook	'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook		'turn-on-eldoc-mode)
-(add-hook 'cider-mode-hook              'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook 'turn-on-eldoc-mode)
 
 ;;pdf book library
 ;;================
