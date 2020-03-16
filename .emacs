@@ -142,9 +142,13 @@ There are two things you can do about this warning:
 
   ;;Org agenda files
   (setq org-agenda-files
-      '("~/one-drive/Notes-AALOK/Qualcomm.org"
-	"~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org"
-	"~/github/Life/Personal.org"))
+	'("~/github/Life/Personal.org"))
+  (if (equal (system-name) "AALOK")
+	(progn
+	  (add-to-list 'org-agenda-files
+		       "~/one-drive/Notes-AALOK/Qualcomm.org")
+	  (add-to-list 'org-agenda-files
+		       "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org")))
 
   ;;Org capture templates
   (setq org-capture-templates
