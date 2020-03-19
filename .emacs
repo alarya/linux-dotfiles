@@ -142,7 +142,7 @@ There are two things you can do about this warning:
 
   ;;Org agenda files
   (setq org-agenda-files
-	'("~/github/Life/Personal.org"))
+	'("~/github/life/Personal.org"))
   (if (equal (system-name) "AALOK")
 	(progn
 	  (add-to-list 'org-agenda-files
