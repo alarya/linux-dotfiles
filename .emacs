@@ -53,6 +53,12 @@ There are two things you can do about this warning:
   :init
   (load-theme 'material t))
 
+(use-package dimmer
+  :ensure t
+  :init
+  (setq dimmer-fraction 0.5)
+  (dimmer-mode t))
+
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
