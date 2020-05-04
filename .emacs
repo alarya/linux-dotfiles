@@ -200,19 +200,24 @@ There are two things you can do about this warning:
 
   (setq org-cycle-separator-lines 1)
 
-  ;;load python
+  ;;load babel languages
   (org-babel-do-load-languages 'org-babel-load-languages
-  			       '((python . t)))
+  			       '((python . t)
+				 (emacs-lisp . t)
+				 (shell . t)
+				 (js . t)))
 
   ;;let css take care of code snippet formatting
   (setq org-html-htmlize-output-type 'css))
 
+;;pretty bullets for org mode
 (use-package org-bullets
   :ensure t
   :commands org-bullets-mode
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
+;;markdown export for org mode
 (use-package ox-gfm
   :ensure t
   :after org
@@ -229,6 +234,14 @@ There are two things you can do about this warning:
   :ensure t
   :init
   (org-ac/config-default))
+
+;;presentation for org mode buffer
+(use-package org-tree-slide
+  :ensure t
+  :after org)
+(use-package org-re-reveal
+  :ensure t
+  :after org)
 
 ;;Completion frameworks
 ;;=====================
@@ -404,7 +417,6 @@ There are two things you can do about this warning:
   (setq ac-modes '(emacs-lisp-mode
 		   lisp-mode
 		   lisp-interaction-mode
-		   csharp-mode
 		   org-mode))
   (ac-config-default)
   (global-auto-complete-mode t))
@@ -421,7 +433,8 @@ There are two things you can do about this warning:
   :ensure t
   :init
   (add-hook 'cider-repl-mode-hook #'company-mode)
-  (add-hook 'cider-mode-hook #'company-mode))
+  (add-hook 'cider-mode-hook #'company-mode)
+  (add-hook 'csharp-mode-hook #'company-mode))
 
 ;;magit settings
 ;;==============
@@ -539,7 +552,9 @@ There are two things you can do about this warning:
 (use-package omnisharp
   :ensure t
   :hook
-  (csharp-mode . omnisharp-mode))
+  (csharp-mode . omnisharp-mode)
+  :init
+  (add-to-list 'company-backends 'company-omnisharp))
 
 ;;Fly check settings
 ;;==================
@@ -560,6 +575,30 @@ There are two things you can do about this warning:
   (add-hook 'python-mode-hook 'linum-mode)
   (setq elpy-rpc-python-command "python3"))
 
+;;Javascript
+;;==========
+(use-package js2-mode
+  :ensure t
+  :defer t
+  :mode
+  (("\\.js\\'" . js2-mode))
+  :init
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode))
+(use-package company-tern
+  :ensure t
+  :hook
+  ((js2-mode-hook . tern-mode)
+   (js2-mode-hook . company-mode))
+  :init
+  (add-to-list 'company-backends 'company-tern))
+
+;;React
+;;=====
+(use-package rjsx-mode
+  :ensure t
+  :defer t
+  :mode
+  (("\\.jsx\\'" . rjsx-mode)))
 
 ;;Stack exchange client
 ;;=====================
