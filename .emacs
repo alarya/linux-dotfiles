@@ -117,6 +117,12 @@ There are two things you can do about this warning:
   :ensure t
   :defer t)
 
+;;God mode
+;;========
+;;Useful for easy naviagtion for reading
+(use-package god-mode
+  :ensure t)
+
 ;;Org mode settings
 ;;=================
 (use-package org
@@ -344,7 +350,8 @@ There are two things you can do about this warning:
   :ensure t
   :config
   (projectile-global-mode)
-  (setq projectile-completion-system 'ivy))
+  (setq projectile-completion-system 'ivy)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;;Treemacs settings
 ;;=================
@@ -403,9 +410,7 @@ There are two things you can do about this warning:
        (treemacs-git-mode 'simple))))
   :bind
   (:map global-map
-        ("M-0"       . treemacs-select-window))
-  )
-
+        ("M-0"       . treemacs-select-window)))
 
 (use-package treemacs-projectile
   :after treemacs projectile
@@ -414,6 +419,11 @@ There are two things you can do about this warning:
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
 
 ;;XML mode settings
 ;;=================
