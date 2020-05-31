@@ -60,7 +60,7 @@ ignore=/.*[.](json|lock|bak)$/
 #		query will override that exclusion.
 #
 [search]
-exclude_tags=spam;trash;personal
+exclude_tags=spam;trash;personal;deleted
 
 # Maildir compatibility configuration
 #

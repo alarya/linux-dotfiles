@@ -521,7 +521,8 @@ There are two things you can do about this warning:
 ;;==============
 (use-package magit
   :ensure t
-  :defer t)
+  :defer t
+  :bind ("C-x g" . magit))
 
 ;;Clojure settings
 ;;===============
