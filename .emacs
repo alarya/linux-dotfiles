@@ -121,7 +121,8 @@ There are two things you can do about this warning:
 ;;========
 ;;Useful for easy naviagtion for reading
 (use-package god-mode
-  :ensure t)
+  :ensure t
+  :bind ("C-c m z" . god-mode-all))
 
 ;;Org mode settings
 ;;=================
@@ -289,7 +290,8 @@ There are two things you can do about this warning:
 (use-package notmuch
   :ensure t
   :config
-  (setq notmuch-search-oldest-first	nil))
+  (setq notmuch-search-oldest-first	nil)
+  :bind ("C-c m m" . notmuch))
 
 (setq smtpmail-default-smtp-server "smtpserver")
 
@@ -522,7 +524,7 @@ There are two things you can do about this warning:
 (use-package magit
   :ensure t
   :defer t
-  :bind ("C-x g" . magit))
+  :bind ("C-c m g" . magit))
 
 ;;Clojure settings
 ;;===============
