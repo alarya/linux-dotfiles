@@ -104,6 +104,9 @@ There are two things you can do about this warning:
 (setq initial-major-mode (quote org-mode))
 (setq major-mode (quote fundamental-mode))
 
+;;set default browser
+(setq browse-url-browser-function 'eww-browse-url)
+
 ;;Stylize mode line
 ;;=================
 (use-package powerline
@@ -161,7 +164,7 @@ There are two things you can do about this warning:
   (if (equal (system-name) "AALOK")
 	(progn
 	  (add-to-list 'org-agenda-files
-		       "~/one-drive/Notes-AALOK/Qualcomm.org")
+		       "~/gitlab/aalok-notes/Qualcomm.org")
 	  (add-to-list 'org-agenda-files
 		       "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org")))
 
@@ -170,7 +173,7 @@ There are two things you can do about this warning:
       '(("w"
 	 "work to do capture"
 	 entry
-	 (file+headline "~/one-drive/Notes-AALOK/Qualcomm.org" "Capture")
+	 (file+headline "~/gitlab/aalok-notes/Qualcomm.org" "Capture")
 	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)
 	("p"
@@ -597,6 +600,11 @@ There are two things you can do about this warning:
   ;; go right to the REPL buffer when it's finished connecting
   (setq cider-repl-pop-to-buffer-on-connect t))
 
+;;Clojure docs
+(use-package ivy-clojuredocs
+  :ensure t
+  :defer t)
+
 ;;ElDoc
 ;;=====
 ;; eldoc-mode shows documentation in the minibuffer when writing code
@@ -675,7 +683,6 @@ There are two things you can do about this warning:
    (js2-mode-hook . company-mode))
   :init
   (add-to-list 'company-backends 'company-tern))
-
 ;;React
 ;;=====
 (use-package rjsx-mode
@@ -701,3 +708,17 @@ There are two things you can do about this warning:
 (use-package copy-as-format
   :ensure t
   :defer t)
+
+;;elfeed setup
+;;============
+(use-package elfeed
+  :ensure t
+  :defer t
+  :bind ("C-c m f" . elfeed)
+  :config
+  (setq elfeed-feeds
+	'(("http://feeds.bbci.co.uk/news/world/rss.xml" bbc)
+	  ("https://hnrss.org/newest" hackernews)
+	  ("http://www.sciencemag.org/rss/current.xml" sciencemag)
+	  ("https://opensource.com/feed" opensource)
+	  ("https://lifehacker.com/rss" lifehacker))))
