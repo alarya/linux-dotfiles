@@ -213,14 +213,16 @@ There are two things you can do about this warning:
   (setq org-cycle-separator-lines 1)
 
   ;;load babel languages
-  (org-babel-do-load-languages 'org-babel-load-languages
-  			       '((python . t)
-				 (emacs-lisp . t)
-				 (shell . t)
-				 (js . t)))
+)
+(org-babel-do-load-languages 'org-babel-load-languages
+			     '((python . t)
+			       (emacs-lisp . t)
+			       (shell . t)
+			       (js . t)))
 
   ;;let css take care of code snippet formatting
-  (setq org-html-htmlize-output-type 'css))
+
+(setq org-html-htmlize-output-type 'css)
 
 ;;pretty bullets for org mode
 (use-package org-bullets
@@ -292,9 +294,14 @@ There are two things you can do about this warning:
 ;;=============
 (use-package notmuch
   :ensure t
+  :bind ("C-c m m" . notmuch)
   :config
   (setq notmuch-search-oldest-first	nil)
-  :bind ("C-c m m" . notmuch))
+  (define-key notmuch-show-mode-map "T"
+    (lambda ()
+      "Trash the message"
+      (interactive)
+      (notmuch-show-tag (list "+trash" "-inbox")))))
 
 (setq smtpmail-default-smtp-server "smtpserver")
 
