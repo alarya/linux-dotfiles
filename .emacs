@@ -49,9 +49,12 @@ There are two things you can do about this warning:
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
 (use-package material-theme
+  :ensure t)
+
+(use-package vscode-dark-plus-theme
   :ensure t
-  :init
-  (load-theme 'material t))
+  :config
+  (load-theme 'vscode-dark-plus t))
 
 (use-package dimmer
   :ensure t
@@ -77,7 +80,7 @@ There are two things you can do about this warning:
                  (with-selected-window window
                      (split-window-below))))))
 
-(setq split-window-preferred-function #'my-split-window-sensibly)
+;;(setq split-window-preferred-function #'my-split-window-sensibly)
  
 ;;Recent files setting
 (use-package recentf
