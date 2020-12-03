@@ -677,6 +677,14 @@ There are two things you can do about this warning:
   (add-hook 'python-mode-hook 'linum-mode)
   (setq elpy-rpc-python-command "python3"))
 
+;;python autocompletion
+(use-package company-anaconda
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'company-backends 'company-anaconda)
+  (add-hook 'python-mode-hook 'anaconda-mode))
+
 ;;Javascript
 ;;==========
 (use-package js2-mode
@@ -732,3 +740,11 @@ There are two things you can do about this warning:
 	  ("http://www.sciencemag.org/rss/current.xml" sciencemag)
 	  ("https://opensource.com/feed" opensource)
 	  ("https://lifehacker.com/rss" lifehacker))))
+
+;;CSV files
+;;=========
+(use-package csv-mode
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode)))
