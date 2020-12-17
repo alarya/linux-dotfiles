@@ -48,19 +48,10 @@ There are two things you can do about this warning:
 ;;don't litter the .emacs file with custom-set-variables
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
-(use-package material-theme
-  :ensure t)
-
-(use-package vscode-dark-plus-theme
+(use-package doom-themes
   :ensure t
   :config
-  (load-theme 'vscode-dark-plus t))
-
-(use-package dimmer
-  :ensure t
-  :init
-  (setq dimmer-fraction 0.5)
-  (dimmer-mode t))
+  (load-theme 'doom-dracula t))
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -112,10 +103,11 @@ There are two things you can do about this warning:
 
 ;;Stylize mode line
 ;;=================
-(use-package powerline
+;; For this package to work need to run following command once
+;; M-x all-the-icons-install-fonts
+(use-package doom-modeline
   :ensure t
-  :config
-  (powerline-default-theme))
+  :init (doom-modeline-mode 1))
 
 ;;Elpa keyring update package
 ;;===========================
@@ -277,6 +269,7 @@ There are two things you can do about this warning:
 
 (use-package counsel
   :ensure t
+  :bind ("C-c m i" . counsel-imenu)
   :after
   (swiper)
   :config
@@ -366,6 +359,7 @@ There are two things you can do about this warning:
   :config
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy)
+  (setq projectile-switch-project-action 'projectile-dired)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 ;;Treemacs settings
