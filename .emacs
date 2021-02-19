@@ -34,7 +34,7 @@ There are two things you can do about this warning:
 (setq-default fill-column 76)
 (setq-default frame-title-format "%b (%f)")
 (set-face-attribute 'default nil
-		    :family "Monospace"
+		    :family "Courier 10 Pitch"
 		    :foundry "outline"
 		    :slant 'normal
 		    :weight 'normal
@@ -51,7 +51,7 @@ There are two things you can do about this warning:
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-dracula t))
+  (load-theme 'doom-acario-dark t))
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
