@@ -51,7 +51,7 @@ There are two things you can do about this warning:
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-acario-dark t))
+  (load-theme 'doom-dark+ t))
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -165,17 +165,23 @@ There are two things you can do about this warning:
 
   ;;Org capture templates
   (setq org-capture-templates
-      '(("w"
+      '(("w" 
 	 "work to do capture"
 	 entry
 	 (file+headline "~/gitlab/aalok-notes/Qualcomm.org" "Capture")
-	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
+	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
+	 :empty-lines 1)
+	("1" 
+	 "qpct capture"
+	 entry
+	 (file+headline "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org" "Capture")
+	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)
 	("p"
 	 "personal to do capture"
 	 entry
 	 (file+headline "~/github/Life/Personal.org" "Capture")
-	 "* TODO %^{Title}\n:PROPERTIES:\n:Recorded: %U\n:END:\n%^{Description}%?"
+	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)))
 
   ;;set org refile targets
@@ -207,16 +213,19 @@ There are two things you can do about this warning:
 
   (setq org-cycle-separator-lines 1)
 
-  ;;load babel languages
-)
+  ;;org export settings
+  (setq org-html-validation-link nil)
+  )
+
+;;load babel languages
 (org-babel-do-load-languages 'org-babel-load-languages
 			     '((python . t)
 			       (emacs-lisp . t)
 			       (shell . t)
-			       (js . t)))
+			       (js . t)
+			       (ditaa . t)))
 
-  ;;let css take care of code snippet formatting
-
+;;let css take care of code snippet formatting
 (setq org-html-htmlize-output-type 'css)
 
 ;;pretty bullets for org mode
@@ -276,15 +285,18 @@ There are two things you can do about this warning:
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-c h") 'counsel-org-agenda-headlines))
 
-;;Yasnippet
-;;=========
-;; (use-package yasnippet
-;;   :ensure t
-;;   :defer 5
-;;   :hook
-;;   (prog-mode yas-minor-mode)
-;;   :config
-;;   (yas-reload-all))
+;; Yasnippet
+;; =========
+(use-package yasnippet
+  :ensure t
+  ;; :hook
+  ;; (prog-mode . yas-minor-mode)
+  ;; (org-mode . yas-minor-mode)
+  ;; :config
+  )
+
+(use-package yasnippet-snippets
+  :ensure t)
 
 ;;Mail settings
 ;;=============
@@ -632,16 +644,19 @@ There are two things you can do about this warning:
   :config
   (pdf-loader-install)
   (setq-default pdf-view-display-size 'fit-page)
-  (use-package org-pdfview
-    :ensure t
-    :config
-    (add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (file link) (org-pdfview-open link))))))
+  ;; (use-package org-pdfview
+  ;;   :ensure t
+  ;;   :config
+  ;;   (add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (file link) (org-pdfview-open link)))))
+  )
 
-;;C Sharp settings
+;;C# settings
 ;;================
 (use-package csharp-mode
   :ensure t
   :defer t
+  ;; :hook
+;;  (csharp-mode . #'customize-csharp-indentation)
   :init
   (electric-pair-local-mode 1))
 
@@ -651,6 +666,12 @@ There are two things you can do about this warning:
   (csharp-mode . omnisharp-mode)
   :init
   (add-to-list 'company-backends 'company-omnisharp))
+
+;;Define indentation settings for C# to match Visual studio
+(defun customize-csharp-indentation ()
+  (setq tab-width 3
+	indent-tabs-mode t
+	c-basic-offset 3))
 
 ;;Fly check settings
 ;;==================
@@ -688,13 +709,21 @@ There are two things you can do about this warning:
   (("\\.js\\'" . js2-mode))
   :init
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode))
-(use-package company-tern
+;; (use-package company-tern
+;;   :ensure t
+;;   :hook
+;;   ((js2-mode-hook . tern-mode)
+;;    (js2-mode-hook . company-mode))
+;;   :init
+;;   ;; (add-to-list 'company-backends 'company-tern)
+;;   )
+
+;;JSON
+;;====
+(use-package json-reformat
   :ensure t
-  :hook
-  ((js2-mode-hook . tern-mode)
-   (js2-mode-hook . company-mode))
-  :init
-  (add-to-list 'company-backends 'company-tern))
+  :defer t)
+
 ;;React
 ;;=====
 (use-package rjsx-mode
