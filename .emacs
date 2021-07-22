@@ -289,11 +289,11 @@ There are two things you can do about this warning:
 ;; =========
 (use-package yasnippet
   :ensure t
-  ;; :hook
-  ;; (prog-mode . yas-minor-mode)
-  ;; (org-mode . yas-minor-mode)
-  ;; :config
-  )
+  :hook
+  (prog-mode . yas-minor-mode)
+  (org-mode . yas-minor-mode)
+  :config
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets"))
 
 (use-package yasnippet-snippets
   :ensure t)
@@ -690,7 +690,7 @@ There are two things you can do about this warning:
   :init
   (advice-add 'python-mode :before 'elpy-enable)
   (add-hook 'python-mode-hook 'linum-mode)
-  (setq elpy-rpc-python-command "python3"))
+  )
 
 ;;python autocompletion
 (use-package company-anaconda
