@@ -1,0 +1,24 @@
+#!/bin/sh
+
+#sync gmail
+echo syncing gmail...
+cd ~/mail/gmail
+echo Pushing changes...
+gmi push
+echo Pulling changes...
+gmi pull
+#restore
+cd -
+
+#syracuse e-mail
+
+#purge deleted mails
+notmuch search --output=files tag:syr and tag:deleted | xargs -l rm
+
+#sync
+echo syncing syr...
+mbsync syr
+
+#run not much
+echo Running notmuch...
+notmuch new

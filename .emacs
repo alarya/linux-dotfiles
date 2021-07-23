@@ -293,7 +293,8 @@ There are two things you can do about this warning:
   (prog-mode . yas-minor-mode)
   (org-mode . yas-minor-mode)
   :config
-  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets"))
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+  (yas-reload-all))
 
 (use-package yasnippet-snippets
   :ensure t)

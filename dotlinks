@@ -5,3 +5,10 @@ ln -s ~/dotfiles/.emacs ~/.emacs
 
 #link notmuch config
 ln -s ~/dotfiles/.notmuch-config ~/.notmuch-config
+
+#link sync mails script
+ln -s ~/dotfiles/sync-mails ~/sync-mails
+
+#link yasnippets
+mkdir ~/.emacs.d/snippets
+ln -s ~/dotfiles/snippets ~/.emacs.d/snippets

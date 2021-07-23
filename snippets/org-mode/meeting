@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: meeting
+# key: <meeting
+# --
+** Meeting $0
+   :PROPERTIES:
+   :RECORDED:	`(let ((x (org-time-stamp '(16) t))))`
+   :ATTENDEES: $1
+   :ATTENDEES+: $2
+   :END: 
