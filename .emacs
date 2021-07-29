@@ -122,6 +122,15 @@ There are two things you can do about this warning:
   :ensure t
   :bind ("C-c m z" . god-mode-all))
 
+;; Expand region for seleting text within delimiters
+;; =========
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-=" . er/expand-region)
+  ("C--" . er/contract-region))
+
+
 ;;Org mode settings
 ;;=================
 (use-package org
@@ -284,6 +293,15 @@ There are two things you can do about this warning:
   :config
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-c h") 'counsel-org-agenda-headlines))
+
+(use-package prescient
+  :ensure t)
+
+(use-package ivy-prescient
+  :ensure t
+  :after counsel
+  :config
+  (ivy-prescient-mode 1))
 
 ;; Yasnippet
 ;; =========
