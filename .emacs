@@ -317,6 +317,16 @@ There are two things you can do about this warning:
 (use-package yasnippet-snippets
   :ensure t)
 
+;; Highlight symbol
+;; ================
+(use-package highlight-symbol
+  :ensure t
+  :bind
+  ("C-c m h n" . highlight-symbol-next)
+  ("C-c m h p" . highlight-symbol-prev)
+  :hook
+  (prog-mode . highlight-symbol-mode))
+
 ;;Mail settings
 ;;=============
 (use-package notmuch
