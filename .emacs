@@ -34,11 +34,10 @@ There are two things you can do about this warning:
 (setq-default fill-column 76)
 (setq-default frame-title-format "%b (%f)")
 (set-face-attribute 'default nil
-		    :family "Courier 10 Pitch"
-		    :foundry "outline"
+		    :family "Fira Code"
 		    :slant 'normal
 		    :weight 'normal
-		    :height 140
+		    :height 110
 		    :width 'normal)
 (setq column-number-mode	t)
 (setq inhibit-startup-message	t)
@@ -47,11 +46,24 @@ There are two things you can do about this warning:
 (toggle-scroll-bar -1)
 ;;don't litter the .emacs file with custom-set-variables
 (setq custom-file (concat user-emacs-directory "/custom.el"))
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
+
+;;Theme settings
+;;===============================
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-dark+ t))
+  ;; (load-theme 'doom-molokai t)
+  (load-theme 'doom-dark+ t)
+  )
+
+;; (use-package monokai-theme
+;;   :ensure t)
+
+;; (use-package material-theme
+;;   :ensure t)
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -130,7 +142,6 @@ There are two things you can do about this warning:
   ("C-=" . er/expand-region)
   ("C--" . er/contract-region))
 
-
 ;;Org mode settings
 ;;=================
 (use-package org
@@ -144,7 +155,10 @@ There are two things you can do about this warning:
 
   ;;enable auto-fill by default for org mode
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
-
+  
+  ;;add id for capture templates
+  (add-hook 'org-capture-mode-hook 'org-id-get-create)
+  
   :mode (("\\.org$" . org-mode))
   
   :bind
@@ -170,8 +184,22 @@ There are two things you can do about this warning:
 	  (add-to-list 'org-agenda-files
 		       "~/gitlab/aalok-notes/Qualcomm.org")
 	  (add-to-list 'org-agenda-files
-		       "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org")))
+		       "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org")
+	  (add-to-list 'org-agenda-files
+		       "~/gitlab/phy-validation/todo.org")))
 
+  ;;Org todo keywords and faces
+  (setq org-todo-keywords
+	'((sequence "TODO(t@) IN-PROGRESS(i@) REVIEW(r@) WAIT(w@) HOLD(h@) | DONE(d@) CANCELED(c@)")))
+
+  (setq org-todo-keyword-faces
+	'(("TODO" . org-warning)
+	  ("IN-PROGRESS" . "orange")
+	  ("REVIEW" . org-warning)
+	  ("WAITING" . org-warning)
+	  ("CANCELED" . "orange")
+	  ("DONE" . "green")))
+  
   ;;Org capture templates
   (setq org-capture-templates
       '(("w" 
@@ -213,6 +241,10 @@ There are two things you can do about this warning:
   (setq org-cycle-open-archived-trees t)
   (setq org-export-with-archived-trees t)
 
+  ;; Calculate completion statistics cookie using all todo children
+  ;; instead of just direct children
+  (setq org-hierarchical-todo-statistics nil)
+  
   ;;custom agenda views
   (setq org-agenda-custom-commands
       '(("b" "My org view"
@@ -223,8 +255,7 @@ There are two things you can do about this warning:
   (setq org-cycle-separator-lines 1)
 
   ;;org export settings
-  (setq org-html-validation-link nil)
-  )
+  (setq org-html-validation-link nil))
 
 ;;load babel languages
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -233,6 +264,11 @@ There are two things you can do about this warning:
 			       (shell . t)
 			       (js . t)
 			       (ditaa . t)))
+
+;;set ditaa path for diagrams while export
+(setq org-ditaa-jar-path "~/winhome/ditaa0_9/ditaa.jar")
+
+(setq org-confirm-babel-evaluate nil)
 
 ;;let css take care of code snippet formatting
 (setq org-html-htmlize-output-type 'css)
@@ -266,9 +302,18 @@ There are two things you can do about this warning:
 (use-package org-tree-slide
   :ensure t
   :after org)
-(use-package org-re-reveal
+
+;; (use-package org-re-reveal
+;;   :ensure t
+;;   :after org)
+
+(use-package ox-reveal
   :ensure t
-  :after org)
+  :config
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
+
+(use-package htmlize
+  :ensure t)
 
 ;;Completion frameworks
 ;;=====================
@@ -324,8 +369,9 @@ There are two things you can do about this warning:
   :bind
   ("C-c m h n" . highlight-symbol-next)
   ("C-c m h p" . highlight-symbol-prev)
-  :hook
-  (prog-mode . highlight-symbol-mode))
+  ;; :hook
+  ;; (prog-mode . highlight-symbol-mode)
+  )
 
 ;;Mail settings
 ;;=============
@@ -477,8 +523,10 @@ There are two things you can do about this warning:
 
 ;;XML mode settings
 ;;=================
-;; (use-package hideshow
-
+(use-package hideshow
+  :ensure t
+  :hook
+  (prog-mode . hs-minor-mode)
 ;;   :hook
 ;;   (sgml-mode nxml-mode)
   
@@ -496,7 +544,7 @@ There are two things you can do about this warning:
 ;; 	       nil))
 
 ;;   ;;(define-key nxml-mode-map (kbd "C-c h") 'hs-toggle-hiding)
-;; )
+)
 
 ;;html settings
 ;;=============
@@ -692,7 +740,8 @@ There are two things you can do about this warning:
 (use-package omnisharp
   :ensure t
   :hook
-  (csharp-mode . omnisharp-mode)
+  ;; (csharp-mode . omnisharp-mode)
+  (csharp-mode . lsp-mode)
   :init
   (add-to-list 'company-backends 'company-omnisharp))
 
@@ -709,7 +758,26 @@ There are two things you can do about this warning:
   :defer t
   :init
   (add-hook 'csharp-mode-hook #'flycheck-mode)
-  (add-hook 'elpy-mode-hook #'flycheck-mode))
+  ;; (add-hook 'elpy-mode-hook #'flycheck-mode)
+  )
+
+;;Language server protocol (lsp-mode)
+;;===================================
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :init
+  (setq lsp-log-io nil)
+  (setq lsp-keymap-prefix "C-c m l")
+  ;; :hook
+  ;; (python-mode . lsp)
+  ;; (csharp-mode . lsp)
+)
+
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :defer t
+;;   :commands lsp-ui-mode)
 
 ;;Python settings
 ;;===============
@@ -718,16 +786,22 @@ There are two things you can do about this warning:
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable)
-  (add-hook 'python-mode-hook 'linum-mode)
-  )
+  (add-hook 'python-mode-hook 'linum-mode))
 
-;;python autocompletion
+;; python autocompletion
 (use-package company-anaconda
   :ensure t
   :defer t
   :init
   (add-to-list 'company-backends 'company-anaconda)
   (add-hook 'python-mode-hook 'anaconda-mode))
+
+;;python docstring editor
+(use-package sphinx-doc
+  :ensure t
+  :defer t
+  :hook
+  (python-mode . sphinx-doc-mode))
 
 ;;Javascript
 ;;==========
@@ -800,3 +874,44 @@ There are two things you can do about this warning:
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode)))
+
+;;Json files
+;;==========
+(use-package json-mode
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.[Jj][Ss][Oo][Nn]\\'" . json-mode)))
+
+;;Which key for discoverability
+;;=============================
+(use-package which-key
+  :ensure t
+  :defer t
+  :bind ("C-c m w" . which-key-mode))
+
+;;Custom shorcuts
+;;===============
+(defun my-launch-windows-explorer-for-buffer ()
+  (interactive)
+  (async-shell-command "explorer.exe ." nil nil))
+(global-set-key (kbd "C-c m e") 'my-launch-windows-explorer-for-buffer)
+
+(defun my-launch-windows-browser ()
+  (interactive)
+  (async-shell-command (concat "chrome.exe " (browse-url-url-at-point))))
+(global-set-key (kbd "C-c m b") 'my-launch-windows-browser)
+
+;; (defun my-launch-buffer-in-windows-browser ()
+;;   (interactive)
+;;   (async-shell-command (concat "chrome.exe " (symbol-value 'buffer-file-name))))
+
+(defun my-launch-powershell-for-buffer ()
+  (interactive)
+  (async-shell-command "powershell.exe ." nil nil))
+(global-set-key (kbd "C-c m p") 'my-launch-powershell-for-buffer)
+
+(defun my-launch-pycharm-for-dir ()
+  (interactive)
+  (async-shell-command "pycharm64.exe ." nil nil))
+(global-set-key (kbd "C-c m y") 'my-launch-pycharm-for-dir)
