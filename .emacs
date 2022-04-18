@@ -68,6 +68,11 @@ There are two things you can do about this warning:
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; icons in dired mode
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode-hook . all-the-icons-dired-mode))
+
 ;;sensible window splitting
 (setq split-height-threshold 120
       split-width-threshold 160)
@@ -236,7 +241,13 @@ There are two things you can do about this warning:
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
   (setq org-agenda-skip-scheduled-if-done t)
-
+  (setq org-agenda-skip-deadline-if-done t)
+  (setq org-agenda-clockreport-parameter-plist
+	'(:link t :maxlevel 4 :tags t
+		:compact t :narrow 50!))
+  (setq org-log-redeadline t)
+  (setq org-log-reschedule t)
+  
   ;;archive subtree settings
   (setq org-cycle-open-archived-trees t)
   (setq org-export-with-archived-trees t)
@@ -255,7 +266,10 @@ There are two things you can do about this warning:
   (setq org-cycle-separator-lines 1)
 
   ;;org export settings
-  (setq org-html-validation-link nil))
+  (setq org-html-validation-link nil)
+
+  ;;Enable habit tracker module
+  (add-to-list 'org-modules 'org-habit t))
 
 ;;load babel languages
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -267,6 +281,16 @@ There are two things you can do about this warning:
 
 ;;set ditaa path for diagrams while export
 (setq org-ditaa-jar-path "~/winhome/ditaa0_9/ditaa.jar")
+
+;;X410 shows dark window and it's hard to see the mouse
+;;while drawing, so change the background locally in the
+;;buffer
+;;(defface ditaa-face '(:background "LightBlue4"))
+;; (make-face 'ditaa-face)
+;; (set-face-background 'ditaa-face "LightBlue4")
+;; (add-hook 'artist-mode-hook
+;;             (lambda ()
+;;               (face-remap-add-relative 'default 'ditaa-face)))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -291,6 +315,11 @@ There are two things you can do about this warning:
 
 (use-package org-id
   :after org)
+
+(use-package git-link
+  :ensure t
+  :init
+  :bind ("C-c g l" . git-link))
 
 ;;auto complete for org-mode
 (use-package org-ac
@@ -915,3 +944,14 @@ There are two things you can do about this warning:
   (interactive)
   (async-shell-command "pycharm64.exe ." nil nil))
 (global-set-key (kbd "C-c m y") 'my-launch-pycharm-for-dir)
+
+(defun my-org-id-generate ()
+  "Create unique ID prop for org entry using org-id-get-create and then 
+copy that to CUSTOM_ID prop. Also, generate RECORDED propety with value
+as an inactive timestamp for today"
+  (interactive)
+  (progn
+    (org-entry-put (point) "CUSTOM_ID" (org-id-get-create))
+    (org-entry-put (point) "RECORDED"
+		   (with-temp-buffer (org-mode)  (org-time-stamp '(16) t)))))
+(global-set-key (kbd "C-c m c") 'my-org-id-generate)
