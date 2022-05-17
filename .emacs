@@ -356,6 +356,19 @@ There are two things you can do about this warning:
   :config
   (ivy-mode 1))
 
+;; Make the minibuffer appear in the center
+(use-package ivy-posframe
+  :ensure t
+  :init
+  ;;Show the minibuffer at the center of the screen
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  ;;Show fringe to distinguish from the background
+  (setq ivy-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
+  :custom-face
+  (ivy-posframe-border ((t (:background "#ffffff"))))
+  :config
+  (ivy-posframe-mode 1))
+
 (use-package swiper
   :ensure t
   :after
