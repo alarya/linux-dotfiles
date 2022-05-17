@@ -385,6 +385,13 @@ There are two things you can do about this warning:
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "C-c h") 'counsel-org-agenda-headlines))
 
+;;counsel org clock - access a list of clock entries through counsel
+(use-package counsel-org-clock
+  :ensure t
+  :bind
+  ("M-g M-j" . counsel-org-clock-goto)
+  ("M-g M-h" . counsel-org-clock-history))
+
 (use-package prescient
   :ensure t)
 
