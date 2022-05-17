@@ -89,7 +89,11 @@ There are two things you can do about this warning:
                      (split-window-below))))))
 
 ;;(setq split-window-preferred-function #'my-split-window-sensibly)
- 
+
+;; Use global hl mode - helps with finding the active window/buffer
+(global-hl-line-mode)
+(set-face-background hl-line-face "gray9")
+
 ;;Recent files setting
 (use-package recentf
   :defer 5
