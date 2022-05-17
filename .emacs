@@ -71,7 +71,7 @@ There are two things you can do about this warning:
 ;; icons in dired mode
 (use-package all-the-icons-dired
   :ensure t
-  :hook (dired-mode-hook . all-the-icons-dired-mode))
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;;sensible window splitting
 (setq split-height-threshold 120
