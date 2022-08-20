@@ -353,6 +353,19 @@ There are two things you can do about this warning:
 ;;   :ensure t
 ;;   :after org)
 
+;;Centaur tabs
+(use-package centaur-tabs
+  :ensure t
+  :demand
+  :init
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-set-bar 'under)
+  (setq x-underline-at-descent-line t)
+  (setq centaur-tabs-height 34)
+  (setq centaur-tabs-set-close-button nil)
+  :config
+  (centaur-tabs-mode t))
+
 (use-package ox-reveal
   :ensure t
   :config
