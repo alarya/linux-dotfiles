@@ -306,6 +306,17 @@ There are two things you can do about this warning:
   ;;org export settings
   (setq org-html-validation-link nil)
 
+  ;;auto switch state on clock-in
+  (defun org-clock-in-switch-to-state-fun (state)
+	  (cond ((string= state "TODO") "IN-PROGRESS")
+		(t state)))
+  (setq org-clock-in-switch-to-state 'org-clock-in-switch-to-state-fun)
+
+  ;;persist clock history
+  (org-clock-persistence-insinuate)
+  (setq org-clock-persist t)
+  (setq org-clock-history-length 12)
+  
   ;;Enable habit tracker module
   (add-to-list 'org-modules 'org-habit t))
 
