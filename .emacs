@@ -33,12 +33,6 @@ There are two things you can do about this warning:
 ;;==============
 (setq-default fill-column 76)
 (setq-default frame-title-format "%b (%f)")
-(set-face-attribute 'default nil
-		    :family "Fira Code"
-		    :slant 'normal
-		    :weight 'normal
-		    :height 110
-		    :width 'normal)
 (setq column-number-mode	t)
 (setq inhibit-startup-message	t)
 (menu-bar-mode -1)
@@ -67,6 +61,7 @@ There are two things you can do about this warning:
 
 ;;maximize frame
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(font . "Cascadia Code"))
 
 ;; icons in dired mode
 (use-package all-the-icons-dired
