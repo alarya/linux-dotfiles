@@ -61,8 +61,12 @@ There are two things you can do about this warning:
 ;; (use-package material-theme
 ;;   :ensure t)
 
-;;maximize frame
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;;maximize frame; remove title bar
+;; (add-to-list 'default-frame-alist
+;; 	     '((fullscreen . maximized)
+;; 	       (undecorated . t)))
+
+(add-to-list 'default-frame-alist '(undecorated . t))
 (add-to-list 'default-frame-alist '(font . "Cascadia Code"))
 
 ;; icons in dired mode
