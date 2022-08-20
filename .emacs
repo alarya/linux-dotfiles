@@ -109,10 +109,22 @@ There are two things you can do about this warning:
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;;set up dashboard
-;;(dashboard-setup-startup-hook)
-;;(setq dashboard-startup-banner 'logo)
-;;(setq dashboard-set-footer nil)
-;;(setq show-week-agenda-p t)
+(use-package dashboard
+  :ensure t
+  :after (org)
+  :init
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-set-footer nil)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-items '((recents . 10)
+			  (projects . 5)
+			  (bookmarks . 5)))
+  ;; (dashboard-center-content t)
+  :config
+  (dashboard-setup-startup-hook)
+  :custom-face
+  (dashboard-heading ((t (:foreground "#f1fa8c" :weight bold)))))
 
 ;;follow sym links
 (setq vc-follow-symlinks t)
