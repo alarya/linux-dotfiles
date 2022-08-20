@@ -50,7 +50,9 @@ There are two things you can do about this warning:
   :ensure t
   :config
   ;; (load-theme 'doom-molokai t)
-  (load-theme 'doom-dark+ t)
+  ;;(load-theme 'doom-dark+ t)
+  ;; (load-theme ' doom-monokai-octagon)
+  (load-theme 'doom-snazzy t)
   )
 
 ;; (use-package monokai-theme
