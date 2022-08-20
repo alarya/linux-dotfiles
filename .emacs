@@ -206,7 +206,7 @@ There are two things you can do about this warning:
 	  (add-to-list 'org-agenda-files
 		       "~/gitlab/aalok-notes/Qualcomm.org")
 	  (add-to-list 'org-agenda-files
-		       "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org")
+		       "~/gitlab/qpct/Docs/QPCT.org")
 	  (add-to-list 'org-agenda-files
 		       "~/gitlab/phy-validation/todo.org")))
 
@@ -230,12 +230,33 @@ There are two things you can do about this warning:
 	 (file+headline "~/gitlab/aalok-notes/Qualcomm.org" "Capture")
 	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
 	 :empty-lines 1)
+	("m" 
+	 "capture meeting notes"
+	 entry
+	 (file+headline "~/gitlab/aalok-notes/Qualcomm.org" "Meetings")
+	 "* Meeting: %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
+	 :empty-lines 1
+	 :clock-in t
+	 :clock-resume t
+	 :jump-to-captured t)
 	("1" 
 	 "qpct capture"
 	 entry
-	 (file+headline "~/p4/PinMux_Dev/latest/Tools/PinMux/PinMux_Dev/Docs/QPCT.org" "Capture")
+	 (file+headline "~/gitlab/qpct/Docs/QPCT.org" "Capture")
 	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
-	 :empty-lines 1)
+	 :empty-lines 1
+	 :clock-in t
+	 :clock-resume t
+	 :jum-to-captured t)
+	("2" 
+	 "phy capture"
+	 entry
+	 (file+headline "~/gitlab/phy-validation/todo.org" "Capture")
+	 "* TODO %^{Title}\n:PROPERTIES:\n:RECORDED: %U\n:END:\n%^{Description}%?"
+	 :empty-lines 1
+	 :clock-in t
+	 :clock-resume t
+	 :jum-to-captured t)
 	("p"
 	 "personal to do capture"
 	 entry
